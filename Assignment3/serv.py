@@ -5,7 +5,7 @@
 # *****************************************************
 
 import socket
-
+import cmds
 # The port on which to listen
 listenPort = 1234
 
@@ -59,34 +59,38 @@ while True:
 	print "Accepted connection from client: ", addr
 	print "\n"
 	
-	# The buffer to all data received from the
-	# the client.
 	fileData = ""
 	
 	# The temporary buffer to store the received
 	# data.
 	recvBuff = ""
 	
-	# The size of the incoming file
-	fileSize = 0	
+	# The size of the incoming command
+	cmdSize = 0	
 	
 	# The buffer containing the file size
-	fileSizeBuff = ""
+	cmdSizeBuff = ""
 	
 	# Receive the first 10 bytes indicating the
-	# size of the file
-	fileSizeBuff = recvAll(clientSock, 10)
+	# size of the command
+	cmdSizeBuff = recvAll(clientSock, 10)
 		
-	# Get the file size
-	fileSize = int(fileSizeBuff)
+	# Get the command size
+	cmdSize = int(fileSizeBuff)
+
+
 	
-	print "The file size is ", fileSize
+	print "The Command size is ", fileSize
 	
-	# Get the file data
-	fileData = recvAll(clientSock, fileSize)
+	# Get the command data
+	cmdData = recvAll(clientSock, fileSize)
 	
-	print "The file data is: "
-	print fileData
+	print "The command is: "
+	print cmdData
+
+	serverCmd = FTP_COMMANDS (cmdData)
+
+	serverCmd.RunCommand(welcomeSock)
 		
 	# Close our side
 	clientSock.close()

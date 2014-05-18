@@ -18,10 +18,10 @@ class FTP_COMMANDS:
                 #Checking to if command was implemented
                 if isinstance(cmd, basestring):
                         self.command_args = cmd.split()
-                        self.isCommand = CheckCommand(self.command_args[0])
+                        self.isCommand = CheckCommand()
                 elif isinstance(cmd, list):
                         self.command_args = cmd
-                        self.isCommand = CheckCommand(self.command_args[0])
+                        self.isCommand = CheckCommand()
                 else:
                         self.command_args = None
                         self.isCommand = False
@@ -29,13 +29,15 @@ class FTP_COMMANDS:
                 self.amIServer = amIServer
 
         #Check to see if it is a command we created or will implement                
-        def CheckCommand(self, cmd):
+        def CheckCommand(self):
 
                 if self.command_args != None:
-                        if cmd in __list_of_valid_commands:
+                        if self.command_args.command_args[0]  in __list_of_valid_commands:
                                 return True
                         else:
                                 return False
+
+                return False
                         
         #Check whether to run the command in the server                
         def CommandDoneInServer(self, cmd):
