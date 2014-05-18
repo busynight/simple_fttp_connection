@@ -10,13 +10,13 @@ import sys
 import cmds
 # Command line checks 
 if len(sys.argv) < 3:
-	print "USAGE python " + sys.argv[0] + " <SERVER_MACHINE> <SERVER_PORT>" 
+	print "USAGE python " + sys.argv[0] + " <SERVER_MACHINE> <SERVER_PORT>"
 
 # Server address
-serverAddr = sys.argv[1]
+serverAddr = int(sys.argv[1])
 
 # Server port
-serverPort = sys.arv[2]
+serverPort = int(sys.arv[2])
 
 # Create a command TCP socket
 commSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -37,22 +37,16 @@ while True:
         
         newCmd = FTP_COMMANDS(cmd)
 
-        # Get the size of the data read
-        # and convert it to string
-
-        if  newCmd.CheckCommand
-            dataSizeStr = str(len(cmd))
+        if  newCmd.CheckCommand:
+            cmdSizeStr = str(len(cmd))
                         
-            # Prepend 0's to the size string
-            # until the size is 10 bytes
-            while len(dataSizeStr) < 10:
-                dataSizeStr = "0" + dataSizeStr
-                
-                # Prepend the size of the data to the
 
-                fileData = dataSizeStr + fileData	
+            while len(cmdSizeStr) < 10:
+                cmdSizeStr = "0" + cmdSizeStr
+
+
+                fileData = dataSizeStr + cmdSizeStr	
                         
-                        # The number of bytes sent
                 numSent = 0
                 while len(fileData) > numSent:
                     numSent += connSock.send(fileData[numSent:])

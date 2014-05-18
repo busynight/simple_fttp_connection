@@ -260,7 +260,7 @@ class FTP_COMMANDS:
                 
                 for line in commands.getstatusoutput(GetCommandInfo[0]):
                         if isinstance(line, basestring):
-                                dataBuffer += line:
+                                dataBuffer += line
 
                 return (dataBuffer, len(dataBuffer))
                 

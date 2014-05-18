@@ -6,17 +6,27 @@
 
 import socket
 import cmds
+import sys
 # The port on which to listen
 listenPort = 1234
 
+
+# Command line checks 
+if len(sys.argv) < 3:
+        print "USAGE python " + sys.argv[0] + " <SERVER_PORT>" 
+
 # Create a welcome socket. 
-welcomeSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+welcomeSock = socket.socket(socket.AF_INET, int(socket.sys.argv[1]))
+
 
 # Bind the socket to the port
 welcomeSock.bind(('', listenPort))
 
 # Start listening on the socket
 welcomeSock.listen(1)
+
+
+print welcomeSock.sockaddress()
 
 # ************************************************
 # Receives the specified number of bytes
